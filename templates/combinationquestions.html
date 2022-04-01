@@ -1,0 +1,12 @@
+<form action="/combinationresult" method="POST">
+    Kanji: {{ kanjit[0].kanji }}
+    Merkitys:
+    <input type="text" name="meaning">
+    Lukutapa:
+    <input type="text" name="read">
+    <br>
+    <input type="submit" value="Tarkistus">
+    <input type="hidden" name="id" value="{{ kanjit[0].id }}">
+    <input type="hidden" name="groupid" value="{{ groupid }}">
+    <input type="hidden" name="counter" value="{{ counter }}">
+    </form>

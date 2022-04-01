@@ -1,0 +1,25 @@
+<form action="/next" method="POST">
+<title>Oikein</title>
+<h2>Vastaukset oikein</h2>
+Kanjin merkityksiä on mm.
+<ul>
+    {% for i in meaning %}
+    <li>{{ i.meaning }}</li>
+    {% endfor %}
+</ul>
+Kun-yomi-lukutapoja on mm.
+<ul>
+    {% for i in kunyomi %}
+    <li>{{ i.kun }}</li>
+    {% endfor %}
+</ul>
+On-yomi-lukutapoja on mm.
+<ul>
+    {% for i in onyomi %}
+    <li>{{ i.ony }}</li>
+    {% endfor %}
+</ul>
+<input type="hidden" name="groupid" value="{{ groupid }}">
+<input type="hidden" name="counter" value="{{ counter }}">
+<input type="submit" value="Seuraava">
+</form>
