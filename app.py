@@ -124,3 +124,53 @@ def combnext():
         return render_template("combinationquestions.html", kanjit=kanjit, groupid=groupid, counter=counter)
     else:
         return render_template("status.html")
+
+
+
+#TESTI
+@app.route("/createtables")
+def createtables():
+    sql =   ["CREATE TABLE Groups (id SERIAL PRIMARY KEY, name TEXT)",
+            "CREATE TABLE Kanji (id SERIAL PRIMARY KEY, kanji VARCHAR, group_id INTEGER REFERENCES Groups)",
+            "CREATE TABLE Meaning (meaning TEXT, kanji_id INTEGER REFERENCES Kanji)",
+            "CREATE TABLE Kunyomi (kun TEXT, kanji_id INTEGER REFERENCES Kanji)",
+            "CREATE TABLE Onyomi (Ony TEXT, kanji_id INTEGER REFERENCES Kanji)",
+            "CREATE TABLE CombGroups (id SERIAL PRIMARY KEY, name TEXT)",
+            "CREATE TABLE COMBINATIONS (id SERIAL PRIMARY KEY, kanji VARCHAR, meaning TEXT, yomikata TEXT, group_id INTEGER REFERENCES CombGroups)",
+            "INSERT INTO Groups (name) VALUES ('ykkonen')",
+            "INSERT INTO Groups (name) VALUES ('kakkonen')",
+            "INSERT INTO Kanji (kanji, group_id) VALUES ('日', 1)",
+            "INSERT INTO Kanji (kanji, group_id) VALUES ('月', 1)",
+            "INSERT INTO Meaning (meaning, kanji_id) VALUES ('päivä', 1)",
+            "INSERT INTO Meaning (meaning, kanji_id) VALUES ('aurinko', 1)",
+            "INSERT INTO Meaning (meaning, kanji_id) VALUES ('kuu', 2)",
+            "INSERT INTO Meaning (meaning, kanji_id) VALUES ('kuukausi', 2)",
+            "INSERT INTO Kunyomi (kun, kanji_id) VALUES ('hi', 1)",
+            "INSERT INTO Kunyomi (kun, kanji_id) VALUES ('bi', 1)",
+            "INSERT INTO Kunyomi (kun, kanji_id) VALUES ('tsuki', 2)",
+            "INSERT INTO Onyomi (ony, kanji_id) VALUES ('nichi', 1)",
+            "INSERT INTO Onyomi (ony, kanji_id) VALUES ('ni', 1)",
+            "INSERT INTO Onyomi (ony, kanji_id) VALUES ('gatsu', 2)",
+            "INSERT INTO Onyomi (ony, kanji_id) VALUES ('getsu', 2)",
+            "INSERT INTO CombGroups (name) VALUES ('ykkonen')",
+            "INSERT INTO CombGroups (name) VALUES ('kakkonen')",
+            "INSERT INTO COMBINATIONS (kanji, meaning, yomikata, group_id) VALUES ('日本', 'japani', 'nihon', 1)",
+            "INSERT INTO COMBINATIONS (kanji, meaning, yomikata, group_id) VALUES ('花火', 'ilotulite', 'hanabi', 1)"]
+    for i in sql:
+        db.session.execute(i)
+    return redirect("/")
+
+@app.route("/addgroup")
+def addgroup():
+    return render_template("addgroup.html")
+
+@app.route("/addtodb", methods=["POST"])
+def addtodb():
+    ryhma = request.form["ryhma"]
+    name = request.form["name"]
+    if ryhma == "1":
+        db.session.execute("INSERT INTO Groups (name) VALUES (':name')", {"name":name})
+        db.session.commit()
+        return redirect("/")
+    else:
+        db.session.execute("INSERT INTO CombGroups (name) VALUES (':name')", {"name":name})
