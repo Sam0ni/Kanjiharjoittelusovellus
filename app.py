@@ -130,13 +130,7 @@ def combnext():
 #TESTI
 @app.route("/createtables")
 def createtables():
-    sql =   ["CREATE TABLE Groups (id SERIAL PRIMARY KEY, name TEXT)",
-            "CREATE TABLE Kanji (id SERIAL PRIMARY KEY, kanji VARCHAR, group_id INTEGER REFERENCES Groups)",
-            "CREATE TABLE Meaning (meaning TEXT, kanji_id INTEGER REFERENCES Kanji)",
-            "CREATE TABLE Kunyomi (kun TEXT, kanji_id INTEGER REFERENCES Kanji)",
-            "CREATE TABLE Onyomi (Ony TEXT, kanji_id INTEGER REFERENCES Kanji)",
-            "CREATE TABLE CombGroups (id SERIAL PRIMARY KEY, name TEXT)",
-            "CREATE TABLE COMBINATIONS (id SERIAL PRIMARY KEY, kanji VARCHAR, meaning TEXT, yomikata TEXT, group_id INTEGER REFERENCES CombGroups)",
+    sql =   [
             "INSERT INTO Groups (name) VALUES ('ykkonen')",
             "INSERT INTO Groups (name) VALUES ('kakkonen')",
             "INSERT INTO Kanji (kanji, group_id) VALUES ('日', 1)",
