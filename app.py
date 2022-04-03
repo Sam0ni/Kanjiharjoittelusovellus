@@ -29,7 +29,7 @@ def readexercise(id):
     kanjitsql = "SELECT id, kanji FROM Kanji WHERE group_id=:id"
     kanjitcom = db.session.execute(kanjitsql, {"id":id})
     kanjit = kanjitcom.fetchall()
-    return render_template("readingquestions.html", kanjit=kanjit, groupid=id, counter=1)
+    return render_template("readingquestions.html", kanjit=kanjit, groupid=id, counter=1, oikein=0)
 
 @app.route("/readresult", methods=["POST"])
 def readresult():
@@ -39,6 +39,7 @@ def readresult():
     read = request.form["meaning"]
     kun = request.form["kun-yomi"]
     on = request.form["on-yomi"]
+    oikein = int(request.form["oikein"])
     meaningsql = "SELECT meaning FROM Meaning WHERE kanji_id=:id"
     meaningcom = db.session.execute(meaningsql, {"id":id})
     meaning = meaningcom.fetchall()
@@ -64,23 +65,25 @@ def readresult():
             onoikein = True
             break
     if kunoikein and onoikein and readoikein:
-        return render_template("correctanswers.html", meaning=meaning, kunyomi=kunyomi, onyomi=onyomi, counter=counter, groupid=groupid) 
+        oikein += 1
+        return render_template("correctanswers.html", meaning=meaning, kunyomi=kunyomi, onyomi=onyomi, counter=counter, groupid=groupid, oikein=oikein) 
     else:
-        return render_template("notcorrectanswers.html", meaning=meaning, kunyomi=kunyomi, onyomi=onyomi, counter=counter, groupid=groupid)
+        return render_template("notcorrectanswers.html", meaning=meaning, kunyomi=kunyomi, onyomi=onyomi, counter=counter, groupid=groupid, oikein=oikein)
 
 @app.route("/next", methods=["POST"])
 def next():
     counter = int(request.form["counter"])
     groupid = request.form["groupid"]
+    oikein = int(request.form["oikein"])
     kanjitsql = "SELECT id, kanji FROM Kanji WHERE group_id=:id"
     kanjitcom = db.session.execute(kanjitsql, {"id":groupid})
     kanjit = kanjitcom.fetchall()
     kanjit = kanjit[counter:]
     counter += 1
     if len(kanjit) > 0:
-        return render_template("readingquestions.html", kanjit=kanjit, groupid=groupid, counter=counter)
+        return render_template("readingquestions.html", kanjit=kanjit, groupid=groupid, counter=counter, oikein=oikein)
     else:
-        return render_template("status.html")
+        return render_template("status.html", counter=counter, oikein=oikein)
 
 @app.route("/combinationexercise")
 def combinations():
@@ -94,13 +97,14 @@ def combinationexercise(id):
     kanjitsql = "SELECT id, kanji FROM Combinations WHERE group_id=:id"
     kanjitcom = db.session.execute(kanjitsql, {"id":id})
     kanjit = kanjitcom.fetchall()
-    return render_template("combinationquestions.html", kanjit=kanjit, groupid=id, counter=1)
+    return render_template("combinationquestions.html", kanjit=kanjit, groupid=id, counter=1, oikein=0)
 
 @app.route("/combinationresult", methods=["POST"])
 def combinationresult():
     id = request.form["id"]
     groupid = request.form["groupid"]
     counter = request.form["counter"]
+    oikein = int(request.form["oikein"])
     read = request.form["meaning"]
     yomikata = request.form["read"]
     sql = "SELECT meaning, yomikata FROM Combinations WHERE id=:id"
@@ -113,7 +117,8 @@ def combinationresult():
     if results[1] == yomikata:
         readoikein = True
     if readoikein and meaningoikein:
-        return render_template("combcorrectanswers.html", counter=counter, groupid=groupid) 
+        oikein += 1
+        return render_template("combcorrectanswers.html", counter=counter, groupid=groupid, oikein=oikein) 
     else:
         return render_template("combnotcorrectanswers.html", results=results, counter=counter, groupid=groupid)
 
@@ -121,15 +126,16 @@ def combinationresult():
 def combnext():
     counter = int(request.form["counter"])
     groupid = request.form["groupid"]
+    oikein = int(request.form["oikein"])
     kanjitsql = "SELECT id, kanji FROM Combinations WHERE group_id=:id"
     kanjitcom = db.session.execute(kanjitsql, {"id":groupid})
     kanjit = kanjitcom.fetchall()
     kanjit = kanjit[counter:]
     counter += 1
     if len(kanjit) > 0:
-        return render_template("combinationquestions.html", kanjit=kanjit, groupid=groupid, counter=counter)
+        return render_template("combinationquestions.html", kanjit=kanjit, groupid=groupid, counter=counter, oikein=oikein)
     else:
-        return render_template("status.html")
+        return render_template("status.html", counter=counter, oikein=oikein)
 
 #TESTI
 @app.route("/createtables")
