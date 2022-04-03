@@ -133,6 +133,7 @@ def combnext():
 #TESTI
 @app.route("/createtables")
 def createtables():
+    db.create_all()
     sql =   ["CREATE TABLE Groups (id SERIAL PRIMARY KEY, name TEXT)",
             "CREATE TABLE Kanji (id SERIAL PRIMARY KEY, kanji VARCHAR, group_id INTEGER REFERENCES Groups)",
             "CREATE TABLE Meaning (meaning TEXT, kanji_id INTEGER REFERENCES Kanji)",
