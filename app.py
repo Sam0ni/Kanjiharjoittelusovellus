@@ -1,10 +1,15 @@
 from flask import Flask
 from flask import redirect, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
-from os import getenv
+import os
+import re
+
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
+#app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
 db = SQLAlchemy(app)
 
 @app.route("/")
