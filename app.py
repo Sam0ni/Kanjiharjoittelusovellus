@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 import re
 
-uri = os.getenv("postgres://otwsvshvogmloe:40492ca5b91ecfc849a2f417357b17d49d212d8eb33fea51af062c517da95535@ec2-99-80-170-190.eu-west-1.compute.amazonaws.com:5432/ddf3jlnb13tvtq")  # or other relevant config var
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 
