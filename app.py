@@ -9,6 +9,7 @@ if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://")
 
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = uri
 #app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
 db = SQLAlchemy(app)
 
