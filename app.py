@@ -161,7 +161,7 @@ def createtables():
             "INSERT INTO COMBINATIONS (kanji, meaning, yomikata, group_id) VALUES ('花火', 'ilotulite', 'hanabi', 1)"]
     for i in sql:
         db.session.execute(i)
-        db.session.commit()
+    db.session.commit()
     return redirect("/")
 
 
