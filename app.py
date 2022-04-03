@@ -140,8 +140,8 @@ def createtables():
             "CREATE TABLE Onyomi (Ony TEXT, kanji_id INTEGER REFERENCES Kanji)",
             "CREATE TABLE CombGroups (id SERIAL PRIMARY KEY, name TEXT)",
             "CREATE TABLE COMBINATIONS (id SERIAL PRIMARY KEY, kanji VARCHAR, meaning TEXT, yomikata TEXT, group_id INTEGER REFERENCES CombGroups)",
-            "INSERT INTO Groups (name) VALUES ('ykkonen')",
-            "INSERT INTO Groups (name) VALUES ('kakkonen')",
+            "INSERT INTO Groups (id, name) VALUES (1, 'ykkonen')",
+            "INSERT INTO Groups (id, name) VALUES (2, 'kakkonen')",
             "INSERT INTO Kanji (kanji, group_id) VALUES ('日', 1)",
             "INSERT INTO Kanji (kanji, group_id) VALUES ('月', 1)",
             "INSERT INTO Meaning (meaning, kanji_id) VALUES ('päivä', 1)",
@@ -155,8 +155,8 @@ def createtables():
             "INSERT INTO Onyomi (ony, kanji_id) VALUES ('ni', 1)",
             "INSERT INTO Onyomi (ony, kanji_id) VALUES ('gatsu', 2)",
             "INSERT INTO Onyomi (ony, kanji_id) VALUES ('getsu', 2)",
-            "INSERT INTO CombGroups (name) VALUES ('ykkonen')",
-            "INSERT INTO CombGroups (name) VALUES ('kakkonen')",
+            "INSERT INTO CombGroups (id, name) VALUES (2, 'ykkonen')",
+            "INSERT INTO CombGroups (id, name) VALUES (1, 'kakkonen')",
             "INSERT INTO COMBINATIONS (kanji, meaning, yomikata, group_id) VALUES ('日本', 'japani', 'nihon', 1)",
             "INSERT INTO COMBINATIONS (kanji, meaning, yomikata, group_id) VALUES ('花火', 'ilotulite', 'hanabi', 1)"]
     for i in sql:
