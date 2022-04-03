@@ -6,12 +6,19 @@ Sovelluksesta puuttuu vielä kirjautumismahdollisuus ja siihen liittyvät toimin
 
 ## sovelluksen testaaminen Herokussa
 https://kanjiharjoittelusovellus.herokuapp.com/
+
 lukutapa linkistä pääsee kertaamaan yksittäisiä kanji-merkkejä. Tällä hetkellä vain harjoitus 1:ssä on merkkejä, ja niitäkin vain 2 testaamista varten.
+
 Tässä merkit ja niihin oikeat vastaukset (huom. "/" merkki tarkoittaa että kumpi vain käy, mutta ei molemmat):
+
 日 merkitys: päivä/aurinko kun-yomi: hi/bi on-yomi: nichi/ni
+
 月 merkitys: kuu/kuukausi kun-yomi: tsuki on-yomi: gatsu/getsu
+
 sama yhdistelmä tehtävissä, mutta merkit ovat eri tietenkin:
+
 日本 merkitys: japani lukutapa: nihon
+
 花火 merkitys: ilotulite lukutapa: hanabi
 
 
