@@ -83,7 +83,7 @@ def next():
     if len(kanjit) > 0:
         return render_template("readingquestions.html", kanjit=kanjit, groupid=groupid, counter=counter, oikein=oikein)
     else:
-        return render_template("status.html", counter=counter, oikein=oikein)
+        return render_template("status.html", counter=counter-1, oikein=oikein)
 
 @app.route("/combinationexercise")
 def combinations():
@@ -120,7 +120,7 @@ def combinationresult():
         oikein += 1
         return render_template("combcorrectanswers.html", counter=counter, groupid=groupid, oikein=oikein) 
     else:
-        return render_template("combnotcorrectanswers.html", results=results, counter=counter, groupid=groupid)
+        return render_template("combnotcorrectanswers.html", results=results, counter=counter, groupid=groupid, oikein=oikein)
 
 @app.route("/combnext", methods=["POST"])
 def combnext():
@@ -135,7 +135,7 @@ def combnext():
     if len(kanjit) > 0:
         return render_template("combinationquestions.html", kanjit=kanjit, groupid=groupid, counter=counter, oikein=oikein)
     else:
-        return render_template("status.html", counter=counter, oikein=oikein)
+        return render_template("status.html", counter=counter-1, oikein=oikein)
 
 #TESTI
 @app.route("/createtables")
