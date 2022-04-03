@@ -126,7 +126,7 @@ def combnext():
         return render_template("status.html")
 
 #TESTI
-@app.route("/createtables", methods=["POST"])
+@app.route("/createtables")
 def createtables():
     sql =   ["CREATE TABLE Groups (id SERIAL PRIMARY KEY, name TEXT)",
             "CREATE TABLE Kanji (id SERIAL PRIMARY KEY, kanji VARCHAR, group_id INTEGER REFERENCES Groups)",
