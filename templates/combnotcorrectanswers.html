@@ -1,6 +1,11 @@
 <form action="/combnext" method="POST">
     <title>Väärin</title>
     <h2>Vastaukset väärin</h2>
+    Sinun vastauksesi olivat:
+    <ul>
+        <li>Merkitys: {{ yread }}</li>
+        <li>lukutapa: {{ yyomikata }}</li> 
+    </ul>
     <p>Yhdistelmän merkitys on: {{ results.meaning }}</p>
     <p>Yhdistelmän lukutapa on: {{ results.yomikata }}</p>
     <input type="hidden" name="groupid" value="{{ groupid }}">
@@ -8,3 +13,4 @@
     <input type="hidden" name="oikein" value="{{ oikein }}">
     <input type="submit" value="Seuraava">
     </form>
+    <a href="/">Takaisin Etusivulle</a>

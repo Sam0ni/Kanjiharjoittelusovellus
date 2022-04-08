@@ -1,6 +1,12 @@
 <form action="/next" method="POST">
 <title>Väärin</title>
 <h2>Vastaukset väärin</h2>
+Sinun vastauksesi olivat:
+<ul>
+    <li>Merkitys: {{ yread }}</li>
+    <li>Kun-yomi: {{ ykun }}</li>
+    <li>On-yomi: {{ yon }}</li> 
+</ul>
 Kanjin merkityksiä on mm.
 <ul>
     {% for i in meaning %}
@@ -24,3 +30,4 @@ On-yomi-lukutapoja on mm.
 <input type="hidden" name="oikein" value="{{ oikein }}">
 <input type="submit" value="Seuraava">
 </form>
+<a href="/">Takaisin Etusivulle</a>

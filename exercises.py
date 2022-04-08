@@ -1,6 +1,6 @@
 from db import db
 
-def readexersices():
+def readexercises():
     sql = "SELECT * FROM Groups"
     result = db.session.execute(sql)
     return result.fetchall()
@@ -36,7 +36,31 @@ def readresult(id, read, kun, on):
             onright = True
             break
     if readright and kunright and onright:
-        return True
+        return (True, meaning, kunyomi, onyomi)
     else:
-        return False
+        return (False, meaning, kunyomi, onyomi)
 
+def combinationexercises():
+    sql = "SELECT * FROM CombGroups"
+    result = db.session.execute(sql)
+    return result.fetchall()
+
+def combexercisekanji(id):
+    kanjitsql = "SELECT id, kanji FROM Combinations WHERE group_id=:id"
+    kanjitcom = db.session.execute(kanjitsql, {"id":id})
+    return kanjitcom.fetchall()
+
+def combinationresult(id, read, yomikata):
+    sql = "SELECT meaning, yomikata FROM Combinations WHERE id=:id"
+    sqlcom = db.session.execute(sql, {"id":id})
+    results = sqlcom.fetchone()
+    readright = False
+    meaningright = False
+    if results[0] == read:
+        meaningright = True
+    if results[1] == yomikata:
+        readright = True
+    if readright and meaningright:
+        return (True, results)
+    else:
+        return (False, results)
