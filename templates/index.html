@@ -5,3 +5,12 @@
     <li><a href="/readexercises">Lukutapa</a></li>
     <li><a href="/combinationexercise">Yhdistelmä</a></li>
 </ul>
+
+{% if session.username %}
+<p>Olet kirjautunut käyttäjällä {{session.username}}</p>
+<a href="/logout">Kirjaudu ulos</a>
+
+{% else %}
+<p><a href="/loginpage">Kirjaudu sisään</a> tai <a href="/registerpage">Rekisteröi uusi käyttäjä</a></p>
+
+{% endif %}
