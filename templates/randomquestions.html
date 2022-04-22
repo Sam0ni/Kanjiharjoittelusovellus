@@ -1,0 +1,16 @@
+<form action="/randomresults" method="POST">
+    Kanji: {{ kanji.kanji }}
+    Merkitys:
+    <input type="text" name="meaning">
+    Kun-yomi:
+    <input type="text" name="kun-yomi">
+    On-yomi:
+    <input type="text" name="on-yomi">
+    <br>
+    <input type="submit" value="Tarkistus">
+    <input type="hidden" name="id" value="{{ kanji_id }}">
+    <input type="hidden" name="counter" value="{{ counter }}">
+    <input type="hidden" name="right" value="{{ right }}">
+    <input type="hidden" name="seed" value="{{ seed }}">
+    </form>
+    <a href="/">Takaisin Etusivulle</a>

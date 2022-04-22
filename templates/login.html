@@ -1,0 +1,9 @@
+<form action="checklogin", method="POST">
+    {% if error %}
+    <p>Käyttäjätunnus tai salasana väärin. Yritä uudelleen.</p>
+    {% endif %}
+    <p>Käyttäjänimi: <input type="text", name="username"></p>
+    <p>Salasana: <input type="text", name="password"></p>
+    <input type="submit" value="Lähetä">
+</form>
+<a href="/">Takaisin Etusivulle</a>

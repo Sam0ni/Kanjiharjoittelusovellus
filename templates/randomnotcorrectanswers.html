@@ -1,0 +1,33 @@
+<form action="/randomnext" method="POST">
+    <title>Väärin</title>
+    <h2>Vastaukset väärin</h2>
+    Sinun vastauksesi olivat:
+    <ul>
+        <li>Merkitys: {{ yread }}</li>
+        <li>Kun-yomi: {{ ykun }}</li>
+        <li>On-yomi: {{ yon }}</li> 
+    </ul>
+    Kanjin merkityksiä on mm.
+    <ul>
+        {% for i in meaning %}
+        <li>{{ i.meaning }}</li>
+        {% endfor %}
+    </ul>
+    Kun-yomi-lukutapoja on mm.
+    <ul>
+        {% for i in kunyomi %}
+        <li>{{ i.kun }}</li>
+        {% endfor %}
+    </ul>
+    On-yomi-lukutapoja on mm.
+    <ul>
+        {% for i in onyomi %}
+        <li>{{ i.ony }}</li>
+        {% endfor %}
+    </ul>
+    <input type="hidden" name="counter" value="{{ counter }}">
+    <input type="hidden" name="right" value="{{ right }}">
+    <input type="hidden" name="seed" value="{{ seed }}">
+    <input type="submit" value="Seuraava">
+    </form>
+    <a href="/">Takaisin Etusivulle</a>
