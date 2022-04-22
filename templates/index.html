@@ -4,10 +4,13 @@
 <ul>
     <li><a href="/readexercises">Lukutapa</a></li>
     <li><a href="/combinationexercise">Yhdistelmä</a></li>
+    {% if session.userid %}
+    <li><a href="/randomize">Satunnainen järjestys</a></li>
+    {% endif %}
 </ul>
 
-{% if session.username %}
-<p>Olet kirjautunut käyttäjällä {{session.username}}</p>
+{% if session.userid %}
+<p>Olet kirjautunut käyttäjällä {{ username }}</p>
 <a href="/logout">Kirjaudu ulos</a>
 
 {% else %}

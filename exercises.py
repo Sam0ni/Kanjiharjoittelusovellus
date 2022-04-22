@@ -64,3 +64,27 @@ def combinationresult(id, read, yomikata):
         return (True, results)
     else:
         return (False, results)
+
+def write_results(id, result, userid):
+    selectsql = "SELECT answer FROM Answers WHERE user_id=:userid AND kanji_id=:id"
+    results = db.session.execute(selectsql, {"userid":userid, "id":id}).fetchone()
+    if results == None:
+        sql = "INSERT INTO Answers (user_id, kanji_id, answer) VALUES (:userid, :id, :result)"
+        db.session.execute(sql, {"userid":userid, "id":id, "result":result})
+        db.session.commit()
+    else:
+        if results[0]:
+            return
+        else:
+            sql = "UPDATE Answers SET answer=:result WHERE user_id=:userid AND kanji_id=:id"
+            db.session.execute(sql, {"userid":userid, "id":id, "result":result})
+            db.session.commit()
+
+def randomize(id):
+    sql = "SELECT kanji_id FROM Answers WHERE answer=TRUE AND user_id=:userid"
+    kanjilist = db.session.execute(sql, {"userid":id}).fetchall()
+    return kanjilist
+
+def get_kanji(id):
+    sql = "SELECT kanji FROM Kanji WHERE id=:id"
+    return db.session.execute(sql, {"id":id}).fetchone()
