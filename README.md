@@ -32,7 +32,7 @@ sama yhdistelmä tehtävissä, mutta merkit ovat eri tietenkin:
 花火 merkitys: ilotulite lukutapa: hanabi
 
 
-Näiden lisäksi sisäänkirjautunut käyttäjä voi kerrata merkkejä, joihin hän on vastannut oikein, satunnaisessa järjestyksessä.
+Näiden lisäksi sisäänkirjautunut käyttäjä voi kerrata merkkejä, joihin hän on vastannut oikein, satunnaisessa järjestyksessä (huom. vain yksittäisiä merkkejä).
 
 
 
