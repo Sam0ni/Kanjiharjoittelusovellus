@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="main.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <title>Etusivu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+</head>
 
-
-<title>Etusivu</title>
 <body>
-    <h1>Etusivu</h1>
-    <h2>Harjoitukset</h2>
+    <div class="header">
+        <h1>Kanjiharjoittelusovellus</h1>
+    </div>
+    <div class="subhead">
+        <h2>Harjoitukset</h2>
+    </div>
     <nav>
         <ul>
             <li><a href="/readexercises">Lukutapa</a></li>
@@ -17,12 +22,19 @@
         </ul>
     </nav>
 
-    {% if session.userid %}
-    <p>Olet kirjautunut käyttäjällä {{ session.username }}</p>
-    <a href="/logout">Kirjaudu ulos</a>
+    <login>
+        {% if session.userid %}
+        <p>Olet kirjautunut käyttäjällä {{ session.username }}</p>
+        <a href="/logout">Kirjaudu ulos</a>
 
-    {% else %}
-    <p><a href="/loginpage">Kirjaudu sisään</a> tai <a href="/registerpage">Rekisteröi uusi käyttäjä</a></p>
+        {% else %}
+        <p><a href="/loginpage">Kirjaudu sisään</a> tai <a href="/registerpage">Rekisteröi uusi käyttäjä</a></p>
 
-    {% endif %}
+        {% endif %}
+    </login>
+    <div class="content">
+        <p>Kanjiharjoittelusovellus on kanji-merkkien harjoitteluun tarkoitettu sovellus. Sovelluksessa pystyy harjoittelemaan yksittäisten merkkien lukutapoja, ja merkkien yhdistelmiä. Sisäänkirjautunut käyttäjä voi myös harjoitella läpi käymiään merkkejä satunnaisessa järjestyksessä.
+
+        </p>
+    </div>
 </body>
