@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Poista Kanji{% endblock %}
+{% block content %}
+{% if success %}
+<p>Poistettu onnistuneesti!</p>
+{% endif %}
+<form action="/removecombfromdb" method="POST">
+    <p>Valitse poistettava Yhdistelmä</p>
+    {% for kanji in kanji %}
+    <input type="radio" name="kanji_id" value={{kanji.id}}> {{ kanji.kanji }}
+    {% endfor %}
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="Lähetä">
+</form>
+{% endblock %}

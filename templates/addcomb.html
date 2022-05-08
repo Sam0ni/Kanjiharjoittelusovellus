@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
-{% block title %}Lisää Kanji{% endblock %}
+{% block title %}Lisää Yhdistelmä{% endblock %}
 {% block content %}
-<form action="/addkanjitodb" method="POST">
+<form action="/addcombtodb" method="POST">
     {% if error %}
-    <p>Lisääminen ei onnistunut. Et ole valinnut ryhmää, Kanji on jo käytössä tai joko kanjin tai merkityksen syöte tyhjä.</p>
+    <p>Lisääminen ei onnistunut. Et ole valinnut ryhmää, Kanji on jo käytössä tai joko kanjin, merkityksen tai lukutavan syöte tyhjä.</p>
     {% endif %}
     {% if success %}
     <p>Lisätty onnistuneesti!</p>
@@ -15,8 +15,7 @@
     </p>
     <p>Kanji: <input type="text" name="kanji"></p>
     <p>Merkitys: <input type="text" name="meaning"></p>
-    <p>Kun-yomi: <input type="text" name="kun"></p>
-    <p>On-yomi: <input type="text" name="ony"></p>
+    <p>Lukutapa: <input type="text" name="yomikata"></p>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="Lähetä">
     </form>

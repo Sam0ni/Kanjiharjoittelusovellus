@@ -153,8 +153,42 @@ def randomnext():
 
 @app.route("/remove")
 def remove():
-    return addtodb.remove()
+    if users.check_admin(session["username"]):
+        return addtodb.remove()
+    else:
+        return render_template("notallowed.html")
 
 @app.route("/removefromdb", methods=["POST"])
 def removefromdb():
-    return addtodb.removefromdb()
+    if users.check_admin(session["username"]):
+        return addtodb.removefromdb()
+    else:
+        return render_template("notallowed.html")
+
+@app.route("/addcomb")
+def addcomb():
+    if users.check_admin(session["username"]):
+        return addtodb.addcomb()
+    else:
+        return render_template("notallowed.html")
+
+@app.route("/addcombtodb", methods=["POST"])
+def addcombtodb():
+    if users.check_admin(session["username"]):
+        return addtodb.addcombtodb()
+    else:
+        return render_template("notallowed.html")
+
+@app.route("/removecomb")
+def removecomb():
+    if users.check_admin(session["username"]):
+        return addtodb.removecomb()
+    else:
+        return render_template("notallowed.html")
+
+@app.route("/removecombfromdb", methods=["POST"])
+def removecombfromdb():
+    if users.check_admin(session["username"]):
+        return addtodb.removecombdb()
+    else:
+        return render_template("notallowed.html")

@@ -22,14 +22,18 @@ def addkanji():
     return render_template("addkanji.html", groups=groups, error=False, success=False)
 
 def addkanjitodb():
-    group = request.form["group"]
+    try:
+        group = request.form["group"]
+    except:
+        groups = db.session.execute("SELECT id, name FROM Groups").fetchall()
+        return render_template("addkanji.html", groups=groups, error=True, success=False)
     kanji = request.form["kanji"]
     meaning = request.form["meaning"]
     kun = request.form["kun"]
     ony = request.form["ony"]
     if len(kanji) == 0 or len(meaning) == 0:
         groups = db.session.execute("SELECT id, name FROM Groups").fetchall()
-        return render_template("addkanji.html", groups=groups, error=True)
+        return render_template("addkanji.html", groups=groups, error=True, success=False)
     try:
         if session["csrf_token"] != request.form["csrf_token"]:
             abort(403)
@@ -105,3 +109,44 @@ def removefromdb():
     db.session.commit()
     kanji = db.session.execute("SELECT id, kanji FROM Kanji").fetchall()
     return render_template("remove.html", kanji=kanji, success=True)
+
+def addcomb():
+    groups = db.session.execute("SELECT id, name FROM CombGroups").fetchall()
+    return render_template("addcomb.html", groups=groups, error=False, success=False)
+
+def addcombtodb():
+    try:
+        group = request.form["group"]
+    except:
+        groups = db.session.execute("SELECT id, name FROM CombGroups").fetchall()
+        return render_template("addcomb.html", groups=groups, error=True, success=False)
+    kanji = request.form["kanji"]
+    meaning = request.form["meaning"]
+    yomikata = request.form["yomikata"]
+    if len(kanji) == 0 or len(meaning) == 0:
+        groups = db.session.execute("SELECT id, name FROM CombGroups").fetchall()
+        return render_template("addcomb.html", groups=groups, error=True, success=False)
+    try:
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+        db.session.execute("INSERT INTO COMBINATIONS (kanji, meaning, yomikata, group_id) VALUES (:kanji, :meaning, :yomikata, :group_id)", {"kanji":kanji, "meaning":meaning, "yomikata":yomikata, "group_id":group})
+        db.session.commit()
+        groups = db.session.execute("SELECT id, name FROM CombGroups").fetchall()
+        return render_template("addcomb.html", groups=groups, error=False, success=True)
+    except:
+        groups = db.session.execute("SELECT id, name FROM CombGroups").fetchall()
+        return render_template("addcomb.html", groups=groups, error=True, success=False)
+
+def removecomb():
+    kanji = db.session.execute("SELECT id, kanji FROM COMBINATIONS").fetchall()
+    return render_template("removecomb.html", kanji=kanji, success=False)
+
+def removecombdb():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    kanji_id = request.form["kanji_id"]
+    sql = "DELETE FROM COMBINATIONS WHERE id=:id"
+    db.session.execute(sql, {"id":kanji_id})
+    db.session.commit()
+    kanji = db.session.execute("SELECT id, kanji FROM COMBINATIONS").fetchall()
+    return render_template("removecomb.html", kanji=kanji, success=True)
