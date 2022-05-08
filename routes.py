@@ -144,3 +144,11 @@ def randomresult():
 @app.route("/randomnext", methods=["POST"])
 def randomnext():
     return randomizeexer.randomnext()
+
+@app.route("/remove")
+def remove():
+    return addtodb.remove()
+
+@app.route("/removefromdb", methods=["POST"])
+def removefromdb():
+    return addtodb.removefromdb()

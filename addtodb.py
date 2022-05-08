@@ -70,3 +70,22 @@ def addmeaningtodb():
         db.session.execute(onsql, {"ony":ony, "kanji_id":kanji_id})
         db.session.commit()
     return redirect("/")
+
+def remove():
+    kanji = db.session.execute("SELECT id, kanji FROM Kanji").fetchall()
+    return render_template("remove.html", kanji=kanji)
+
+def removefromdb():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    kanji_id = request.form["kanji_id"]
+    meaningsql = "DELETE FROM Meaning WHERE kanji_id=:id"
+    kunsql = "DELETE FROM Kunyomi WHERE kanji_id=:id"
+    onsql = "DELETE FROM Onyomi WHERE kanji_id=:id"
+    sql = "DELETE FROM Kanji WHERE id=:id"
+    db.session.execute(meaningsql, {"id":kanji_id})
+    db.session.execute(kunsql, {"id":kanji_id})
+    db.session.execute(onsql, {"id":kanji_id})
+    db.session.execute(sql, {"id":kanji_id})
+    db.session.commit()
+    return redirect("/")
