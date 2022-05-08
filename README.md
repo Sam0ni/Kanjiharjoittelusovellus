@@ -1,8 +1,7 @@
 # Kanjiharjoittelusovellus
 
-## Sovelluksen nykytilanne
-Sovellukseen voi nyt kirjautua, ja läpikäytyjä merkkejä voi kerrata satunnaisessa järjestyksessä.
-Sovelluksesta vielä puuttuu admin käyttjäjien toiminnot kuten merkkien lisääminen.
+## Lopullinen sovellus
+Sovellus on valmis. Kirjautumaton käyttäjä voi kerrata yksittäisiä Kanji-merkkejä, ja yhdistelmiä. Vastauksia ei tallenneta jos ei ole sisäänkirjautunut. Sisäänkirjautuneen käyttäjän vastaukset (oikein vai väärin) tallennetaan yksittäisiä merkkejä kerratessa, ja oikein vastattuja merkkejä voi kerrata satunnaisessa järjestyksessä (vain jos on vastannut oikein tarpeeksi moneen). Jos käyttäjä on ylläpitäjä, voi hän lisätä ryhmiä, merkkejä ja niiden lukutapoja ja myöskin yhdistelmiä. Hän voi myös poistaa yksittäisiä merkkejä, jolloin kaikki niiden lukutavat yms. poistetaan myös, ja yhdistelmiä.
 
 ## sovelluksen testaaminen Herokussa
 https://kanjiharjoittelusovellus.herokuapp.com/
@@ -34,6 +33,7 @@ sama yhdistelmä tehtävissä, mutta merkit ovat eri tietenkin:
 
 Näiden lisäksi sisäänkirjautunut käyttäjä voi kerrata merkkejä, joihin hän on vastannut oikein, satunnaisessa järjestyksessä (huom. vain yksittäisiä merkkejä).
 
+Ylläpitäjän oikeuksia vaativia toimenpiteitä voi testata käyttäjällä "admin" (salasana "admin")
 
 
 ## Sovelluksen tarkoitus
