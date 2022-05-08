@@ -1,25 +1,38 @@
 # Kanjiharjoittelusovellus
 
 ## Sovelluksen nykytilanne
-Sovelluksessa toimii nyt yksittäisten kanji-merkkien ja yhdistelmien  harjoittelu.
-Sovelluksesta puuttuu vielä kirjautumismahdollisuus ja siihen liittyvät toiminnot.
+Sovellukseen voi nyt kirjautua, ja läpikäytyjä merkkejä voi kerrata satunnaisessa järjestyksessä.
+Sovelluksesta vielä puuttuu admin käyttjäjien toiminnot kuten merkkien lisääminen.
 
 ## sovelluksen testaaminen Herokussa
 https://kanjiharjoittelusovellus.herokuapp.com/
 
-lukutapa linkistä pääsee kertaamaan yksittäisiä kanji-merkkejä. Tällä hetkellä vain harjoitus 1:ssä on merkkejä, ja niitäkin vain 2 testaamista varten.
+lukutapa linkistä pääsee kertaamaan yksittäisiä kanji-merkkejä. Harjoitus 1:ssä on 3 merkkiä ja 2:ssa 2.
 
 Tässä merkit ja niihin oikeat vastaukset (huom. "/" merkki tarkoittaa että kumpi vain käy, mutta ei molemmat):
 
-日 merkitys: päivä/aurinko kun-yomi: hi/bi on-yomi: nichi/ni
+Harjoitus 1:
 
-月 merkitys: kuu/kuukausi kun-yomi: tsuki on-yomi: gatsu/getsu
+日 merkitys: päivä/aurinko, kun-yomi: hi/bi, on-yomi: nichi/ni
+
+月 merkitys: kuu/kuukausi, kun-yomi: tsuki, on-yomi: gatsu/getsu
+
+水 merkitys: vesi, kun-yomi: mizu, on-yomi: sui
+
+Harjoitus 2:
+
+金 merkitys: kulta, kun-yomi: kane, on-yomi: kin
+
+火 Merkitys: tuli, kun-yomi: hi, on-yomi: ka
 
 sama yhdistelmä tehtävissä, mutta merkit ovat eri tietenkin:
 
 日本 merkitys: japani lukutapa: nihon
 
 花火 merkitys: ilotulite lukutapa: hanabi
+
+
+Näiden lisäksi sisäänkirjautunut käyttäjä voi kerrata merkkejä, joihin hän on vastannut oikein, satunnaisessa järjestyksessä (huom. vain yksittäisiä merkkejä).
 
 
 
