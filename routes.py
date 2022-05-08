@@ -19,11 +19,14 @@ def index():
 @app.route("/readexercises")
 def readexercises():
     allexercises = exercises.readexercises()
-    return render_template("readingexercises.html", exercises=allexercises)
+    return render_template("readingexercises.html", exercises=allexercises, error = False)
 
 @app.route("/readexercise/<int:id>")
 def readexercise(id):
     kanji = exercises.readexersiceskanji(id)
+    if len(kanji) == 0:
+        allexercises = exercises.readexercises()
+        return render_template("readingexercises.html", exercises=allexercises, error = True)
     return render_template("readingquestions.html", kanji=kanji, groupid=id, counter=1, right=0)
 
 @app.route("/readresult", methods=["POST"])
@@ -37,11 +40,14 @@ def next():
 @app.route("/combinationexercise")
 def combinationsexercises():
     allexercises = combinations.combinationexercises()
-    return render_template("combinationexercises.html", exercises=allexercises)
+    return render_template("combinationexercises.html", exercises=allexercises, error=False)
 
 @app.route("/combinationexercise/<int:id>")
 def combinationexercise(id):
     kanji = combinations.combexercisekanji(id)
+    if len(kanji) == 0:
+        allexercises = combinations.combinationexercises()
+        return render_template("combinationexercises.html", exercises=allexercises, error = True)
     return render_template("combinationquestions.html", kanji=kanji, groupid=id, counter=1, right=0)
 
 @app.route("/combinationresult", methods=["POST"])

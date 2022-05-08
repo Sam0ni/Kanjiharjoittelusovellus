@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}Poista Kanji{% endblock %}
 {% block content %}
+{% if success %}
+<p>Poistettu onnistuneesti!</p>
+{% endif %}
 <form action="/removefromdb" method="POST">
     <p>Valitse poistettava Kanji</p>
     {% for kanji in kanji %}

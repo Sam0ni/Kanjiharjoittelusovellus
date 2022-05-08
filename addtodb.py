@@ -19,7 +19,7 @@ def addtodb():
 
 def addkanji():
     groups = db.session.execute("SELECT id, name FROM Groups").fetchall()
-    return render_template("addkanji.html", groups=groups)
+    return render_template("addkanji.html", groups=groups, error=False, success=False)
 
 def addkanjitodb():
     group = request.form["group"]
@@ -27,6 +27,9 @@ def addkanjitodb():
     meaning = request.form["meaning"]
     kun = request.form["kun"]
     ony = request.form["ony"]
+    if len(kanji) == 0 or len(meaning) == 0:
+        groups = db.session.execute("SELECT id, name FROM Groups").fetchall()
+        return render_template("addkanji.html", groups=groups, error=True)
     try:
         if session["csrf_token"] != request.form["csrf_token"]:
             abort(403)
@@ -41,13 +44,15 @@ def addkanjitodb():
         db.session.execute(kunsql, {"kun":kun, "kanji_id":kanji_id})
         db.session.execute(meaningsql, {"meaning":meaning, "kanji_id":kanji_id})
         db.session.commit()
-        return redirect("/")
+        groups = db.session.execute("SELECT id, name FROM Groups").fetchall()
+        return render_template("addkanji.html", groups=groups, error=False, success=True)
     except:
-        return redirect("/")
+        groups = db.session.execute("SELECT id, name FROM Groups").fetchall()
+        return render_template("addkanji.html", groups=groups, error=True, success=False)
 
 def addmeaning():
     kanji = db.session.execute("SELECT id, kanji FROM Kanji").fetchall()
-    return render_template("addmeaning.html", kanji=kanji)
+    return render_template("addmeaning.html", kanji=kanji, success=False, error=False)
 
 def addmeaningtodb():
     addto = request.form.getlist("addto")
@@ -55,25 +60,35 @@ def addmeaningtodb():
     meaning = request.form["meaning"]
     kun = request.form["kun"]
     ony = request.form["ony"]
+    success = False
+    error = False
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
+    if ("M" in addto and len(meaning) == 0) or ("K" in addto and len(kun) == 0) or ("O" in addto and len(ony) == 0):
+        error = True
+        kanji = db.session.execute("SELECT id, kanji FROM Kanji").fetchall()
+        return render_template("addmeaning.html", kanji=kanji, success=success, error=error)
     if "M" in addto and len(meaning) > 0:
         meaningsql = "INSERT INTO Meaning (meaning, kanji_id) VALUES (:meaning, :kanji_id)"
         db.session.execute(meaningsql, {"meaning":meaning, "kanji_id":kanji_id})
         db.session.commit()
+        success = True
     if "K" in addto and len(kun) > 0:
         kunsql = "INSERT INTO Kunyomi (kun, kanji_id) VALUES (:kun, :kanji_id)"
         db.session.execute(kunsql, {"kun":kun, "kanji_id":kanji_id})
         db.session.commit()
+        success = True
     if "O" in addto and len(ony) > 0:
         onsql = "INSERT INTO Onyomi (ony, kanji_id) VALUES (:ony, :kanji_id)"
         db.session.execute(onsql, {"ony":ony, "kanji_id":kanji_id})
         db.session.commit()
-    return redirect("/")
+        success = True
+    kanji = db.session.execute("SELECT id, kanji FROM Kanji").fetchall()
+    return render_template("addmeaning.html", kanji=kanji, success=success, error=error)
 
 def remove():
     kanji = db.session.execute("SELECT id, kanji FROM Kanji").fetchall()
-    return render_template("remove.html", kanji=kanji)
+    return render_template("remove.html", kanji=kanji, success=False)
 
 def removefromdb():
     if session["csrf_token"] != request.form["csrf_token"]:
@@ -88,4 +103,5 @@ def removefromdb():
     db.session.execute(onsql, {"id":kanji_id})
     db.session.execute(sql, {"id":kanji_id})
     db.session.commit()
-    return redirect("/")
+    kanji = db.session.execute("SELECT id, kanji FROM Kanji").fetchall()
+    return render_template("remove.html", kanji=kanji, success=True)

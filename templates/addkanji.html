@@ -2,6 +2,12 @@
 {% block title %}Lisää Kanji{% endblock %}
 {% block content %}
 <form action="/addkanjitodb" method="POST">
+    {% if error %}
+    <p>Lisääminen ei onnistunut. Kanji käytössä tai joko kanjin tai merkityksen syöte tyhjä.</p>
+    {% endif %}
+    {% if success %}
+    <p>Lisätty onnistuneesti!</p>
+    {% endif %}
     <p>
         {% for group in groups %}
         <input type="radio" name="group" value={{group.id}}> {{ group.name }}

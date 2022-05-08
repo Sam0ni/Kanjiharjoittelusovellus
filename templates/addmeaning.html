@@ -2,6 +2,11 @@
 {% block title %}Lisää lukutapoja{% endblock %}
 {% block content %}
 <form action="/addmeaningtodb" method="POST">
+    {% if success %}
+    <p>Lisätty onnistuneesti!</p>
+    {% endif %}
+    {% if error %}
+    <p>Lisäys ei onnistunut. Syöte tyhjä.</p>
     {% for kanji in kanji %}
     <input type="radio" name="kanji_id" value={{kanji.id}}> {{ kanji.kanji }}
     {% endfor %}

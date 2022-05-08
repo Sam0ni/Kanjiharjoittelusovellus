@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}Yhdistelmätehtävät{% endblock %}
 {% block content %}
+{% if error %}
+<p>Valitsemassasi ryhmässä ei ole vielä Merkkejä. Valitse toinen ryhmä.</p>
+{% endif %}
 <hr>
 {% for i in exercises %}
 <a href="/combinationexercise/{{ i.id }}">Harjoitus {{ i.id }}</a>
