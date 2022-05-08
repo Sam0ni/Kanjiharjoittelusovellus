@@ -19,6 +19,9 @@
             {% if session.userid %}
             <li><a href="/randomize">Satunnainen järjestys</a></li>
             {% endif %}
+            {% if admin %}
+            <li><a href="/addpage">Lisäys tietokantaan</a></li>
+            {% endif %}
         </ul>
     </nav>
 

@@ -4,12 +4,17 @@ import exercises
 import users
 import combinations
 import randomizeexer
+import addtodb
 from random import shuffle, randint, Random
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    try:
+        admin = users.check_admin(session["username"])
+        return render_template("index.html", admin=admin)
+    except:
+        return render_template("index.html", admin=False)
 
 @app.route("/readexercises")
 def readexercises():
@@ -30,7 +35,7 @@ def next():
     return exercises.next()
 
 @app.route("/combinationexercise")
-def combinations():
+def combinationsexercises():
     allexercises = combinations.combinationexercises()
     return render_template("combinationexercises.html", exercises=allexercises)
 
@@ -47,22 +52,55 @@ def combinationresult():
 def combnext():
     return combinations.combnext()
 
+@app.route("/addpage")
+def addpage():
+    if users.check_admin(session["username"]):
+        return render_template("addpage.html")
+    else:
+        return render_template("notallowed.html")
 
-# add functions not finished
-    @app.route("/addgroup")
-    def addgroup():
+@app.route("/addgroup")
+def addgroup():
+    if users.check_admin(session["username"]):
         return render_template("addgroup.html")
+    else:
+        return render_template("notallowed.html")
 
-    @app.route("/addtodb", methods=["POST"])
-    def addtodb():
-        group = request.form["group"]
-        name = request.form["name"]
-        if group == "1":
-            db.session.execute("INSERT INTO Groups (name) VALUES (':name')", {"name":name})
-            db.session.commit()
-            return redirect("/")
-        else:
-            db.session.execute("INSERT INTO CombGroups (name) VALUES (':name')", {"name":name})
+@app.route("/addtodb", methods=["POST"])
+def addgrouptodb():
+    if users.check_admin(session["username"]):
+        return addtodb.addtodb()
+    else:
+        return render_template("notallowed.html")
+
+@app.route("/addkanji")
+def addkanji1():
+    if users.check_admin(session["username"]):
+        return addtodb.addkanji()
+    else:
+        return render_template("notallowed.html")
+
+@app.route("/addkanjitodb", methods=["POST"])
+def addkanjitodb1():
+    if users.check_admin(session["username"]):
+        return addtodb.addkanjitodb()
+    else:
+        return render_template("notallowed.html")
+
+@app.route("/addmeaning")
+def addmeaning1():
+    if users.check_admin(session["username"]):
+        return addtodb.addmeaning()
+    else:
+        return render_template("notallowed.html")
+
+@app.route("/addmeaningtodb", methods=["POST"])
+def addmeaningtodb1():
+    if users.check_admin(session["username"]):
+        return addtodb.addmeaningtodb()
+    else:
+        return render_template("notallowed.html")
+
 
 @app.route("/loginpage")
 def loginpage():

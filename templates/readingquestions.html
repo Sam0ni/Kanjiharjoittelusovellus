@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Harjoitus {{ groupid }}{% endblock %}
+{% block content %}
 <form action="/readresult" method="POST">
 Kanji: {{ kanji[0].kanji }}
 Merkitys:
@@ -8,9 +11,10 @@ On-yomi:
 <input type="text" name="on-yomi">
 <br>
 <input type="submit" value="Tarkistus">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 <input type="hidden" name="id" value="{{ kanji[0].id }}">
 <input type="hidden" name="groupid" value="{{ groupid }}">
 <input type="hidden" name="counter" value="{{ counter }}">
 <input type="hidden" name="right" value="{{ right }}">
 </form>
-<a href="/">Takaisin Etusivulle</a>
+{% endblock %}

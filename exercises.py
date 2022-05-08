@@ -1,5 +1,5 @@
 from db import db
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, abort
 
 def readexercises():
     sql = "SELECT * FROM Groups"
@@ -32,21 +32,23 @@ def readresult():
     kunright = False
     onright = False
     for i in meaning:
-        if read == i[0]:
+        if read.lower() == i[0]:
             readright = True
             break
     for i in kunyomi:
-        if kun == i[0]:
+        if kun.lower() == i[0]:
             kunright = True
             break
     for i in onyomi:
-        if on == i[0]:
+        if on.lower() == i[0]:
             onright = True
             break
     if readright and kunright and onright:
         right += 1
         try:
             if session["userid"]:
+                if session["csrf_token"] != request.form["csrf_token"]:
+                    abort(403)
                 write_results(id, True, session["userid"])
         except:
             pass
@@ -54,10 +56,12 @@ def readresult():
     else:
         try:
             if session["userid"]:
+                if session["csrf_token"] != request.form["csrf_token"]:
+                    abort(403)
                 write_results(id, False, session["userid"])
         except:
             pass
-        return render_template("notcorrectanswers.html", meaning=meaning[1], kunyomi=kunyomi, onyomi=onyomi, counter=counter, groupid=groupid, right=right, yread=read, ykun=kun, yon=on)
+        return render_template("notcorrectanswers.html", meaning=meaning, kunyomi=kunyomi, onyomi=onyomi, counter=counter, groupid=groupid, right=right, yread=read, ykun=kun, yon=on)
 
 def write_results(id, result, userid):
     selectsql = "SELECT answer FROM Answers WHERE user_id=:userid AND kanji_id=:id"

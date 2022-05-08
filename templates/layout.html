@@ -1,0 +1,22 @@
+<!doctype html>
+<head>
+    <title>Kanjiharjoittelusovellus - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+</head>
+<body>
+    <div class="header">
+        <h1>Kanjiharjoittelusovellus</h1>
+        <a href="/">Etusivu</a>
+        <a href="/readexercises">Lukutapaharjoitukset</a>
+        <a href="/combinationexercise">Yhdistelmäharjoitukset</a>
+        {% if session.userid %}
+        <a href="/randomize">Satunnainen järjestys</a>
+        {% endif %}
+    </div>
+</body>
+<hr>
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+<hr>

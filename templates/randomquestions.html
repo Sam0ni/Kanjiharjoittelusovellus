@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Satunnainen järjestys{% endblock %}
+{% block content %}
 <form action="/randomresults" method="POST">
     Kanji: {{ kanji.kanji }}
     Merkitys:
@@ -13,4 +16,4 @@
     <input type="hidden" name="right" value="{{ right }}">
     <input type="hidden" name="seed" value="{{ seed }}">
     </form>
-    <a href="/">Takaisin Etusivulle</a>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Lisää lukutapoja{% endblock %}
+{% block content %}
+<form action="/addmeaningtodb" method="POST">
+    {% for kanji in kanji %}
+    <input type="radio" name="kanji_id" value={{kanji.id}}> {{ kanji.kanji }}
+    {% endfor %}
+    <p>
+        <input type="checkbox" name="addto" value="M"> merkitys
+        <input type="checkbox" name="addto" value="K"> Kunyomi
+        <input type="checkbox" name="addto" value="O"> Onyomi
+    </p>
+    <p>Merkitys: <input type="text" name="meaning"></p>
+    <p>Kun-yomi: <input type="text" name="kun"></p>
+    <p>On-yomi: <input type="text" name="ony"></p>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="Lähetä">
+</form>
+{% endblock %}

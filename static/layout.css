@@ -1,6 +1,5 @@
 body {
     margin: auto;
-    max-width: 45em;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: large;
 }
@@ -25,7 +24,7 @@ h2 {
 login {
     display: block;
     float: right;
-    background: rgb(185, 0, 0);
+    background: rgb(143, 0, 0);
     padding: 1em;
     border-radius: .5em;
 }
@@ -51,6 +50,11 @@ ul {
 .content {
     font-size: 1em;
     background: red;
-    padding: 1.5em 2em;
+    padding: 1.5em 0em;
     border-radius: .5em;
+    text-align: center;
+}
+
+hr {
+    color: white;
 }

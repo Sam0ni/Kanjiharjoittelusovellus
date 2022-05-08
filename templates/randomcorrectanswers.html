@@ -1,5 +1,7 @@
+{% extends "layout.html" %}
+{% block title %} Oikein {% endblock %}
+{% block content %}
 <form action="/randomnext" method="POST">
-    <title>Oikein</title>
     <h2>Vastaukset oikein</h2>
     Kanjin merkityksiä on mm.
     <ul>
@@ -24,4 +26,4 @@
     <input type="hidden" name="seed" value="{{ seed }}">
     <input type="submit" value="Seuraava">
     </form>
-    <a href="/">Takaisin Etusivulle</a>
+{% endblock %}

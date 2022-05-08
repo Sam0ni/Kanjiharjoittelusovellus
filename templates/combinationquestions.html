@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Harjoitus {{ groupid }}{% endblock %}
+{% block content %}
 <form action="/combinationresult" method="POST">
     Kanji: {{ kanji[0].kanji }}
     Merkitys:
@@ -12,3 +15,4 @@
     <input type="hidden" name="right" value="{{ right }}">
     </form>
     <a href="/">Takaisin Etusivulle</a>
+{% endblock %}

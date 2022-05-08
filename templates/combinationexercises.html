@@ -1,6 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}Yhdistelmätehtävät{% endblock %}
+{% block content %}
 <hr>
 {% for i in exercises %}
 <a href="/combinationexercise/{{ i.id }}">Harjoitus {{ i.id }}</a>
 <hr>
 {% endfor %}
 <a href="/">Takaisin Etusivulle</a>
+{% endblock %}

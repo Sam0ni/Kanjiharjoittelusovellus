@@ -1,5 +1,7 @@
+{% extends "layout.html" %}
+{% block title %} Väärin {% endblock %}
+{% block content %}
 <form action="/randomnext" method="POST">
-    <title>Väärin</title>
     <h2>Vastaukset väärin</h2>
     Sinun vastauksesi olivat:
     <ul>
@@ -30,4 +32,4 @@
     <input type="hidden" name="seed" value="{{ seed }}">
     <input type="submit" value="Seuraava">
     </form>
-    <a href="/">Takaisin Etusivulle</a>
+{% endblock %}

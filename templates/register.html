@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Rekisteröinti{% endblock %}
+{% block content %}
 <form action="checkregister", method="POST">
     {% if error %}
     <p>Käyttäjätunnus varattu. Yritä toista tunnusta.</p>
@@ -7,3 +10,4 @@
     <input type="submit" value="Lähetä">
 </form>
 <a href="/">Takaisin Etusivulle</a>
+{% endblock %}

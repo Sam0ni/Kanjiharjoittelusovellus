@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Kirjaudu sisään{% endblock %}
+{% block content %}
 <form action="checklogin", method="POST">
     {% if error %}
     <p>Käyttäjätunnus tai salasana väärin. Yritä uudelleen.</p>
@@ -7,3 +10,4 @@
     <input type="submit" value="Lähetä">
 </form>
 <a href="/">Takaisin Etusivulle</a>
+{% endblock %}

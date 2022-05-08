@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Oikein{% endblock %}
+{% block content %}
 <form action="/next" method="POST">
 <title>Oikein</title>
 <h2>Vastaukset oikein</h2>
@@ -25,3 +28,4 @@ On-yomi-lukutapoja on mm.
 <input type="submit" value="Seuraava">
 </form>
 <a href="/">Takaisin Etusivulle</a>
+{% endblock %}

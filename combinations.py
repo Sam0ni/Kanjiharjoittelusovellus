@@ -23,15 +23,15 @@ def combinationresult():
     results = sqlcom.fetchone()
     readright = False
     meaningright = False
-    if results[0] == read:
+    if results[0] == read.lower():
         meaningright = True
-    if results[1] == yomikata:
+    if results[1] == yomikata.lower():
         readright = True
     if readright and meaningright:
         right += 1
         return render_template("combcorrectanswers.html", counter=counter, groupid=groupid, right=right) 
     else:
-        return render_template("combnotcorrectanswers.html", results=results[1], counter=counter, groupid=groupid, right=right, yread=read, yyomikata=yomikata)
+        return render_template("combnotcorrectanswers.html", results=results, counter=counter, groupid=groupid, right=right, yread=read, yyomikata=yomikata)
 
 def combnext():
     counter = int(request.form["counter"])

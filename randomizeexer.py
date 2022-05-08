@@ -36,15 +36,15 @@ def readresult():
     kunright = False
     onright = False
     for i in meaning:
-        if read == i[0]:
+        if read.lower() == i[0]:
             readright = True
             break
     for i in kunyomi:
-        if kun == i[0]:
+        if kun.lower() == i[0]:
             kunright = True
             break
     for i in onyomi:
-        if on == i[0]:
+        if on.lower() == i[0]:
             onright = True
             break
     if readright and kunright and onright:

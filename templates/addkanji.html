@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Lisää Kanji{% endblock %}
+{% block content %}
+<form action="/addkanjitodb" method="POST">
+    <p>
+        {% for group in groups %}
+        <input type="radio" name="group" value={{group.id}}> {{ group.name }}
+        {% endfor %}
+    </p>
+    <p>Kanji: <input type="text" name="kanji"></p>
+    <p>Merkitys: <input type="text" name="meaning"></p>
+    <p>Kun-yomi: <input type="text" name="kun"></p>
+    <p>On-yomi: <input type="text" name="ony"></p>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="Lähetä">
+    </form>
+{% endblock %}
