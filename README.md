@@ -3,8 +3,12 @@
 ## Lopullinen sovellus
 Sovellus on valmis. Kirjautumaton käyttäjä voi kerrata yksittäisiä Kanji-merkkejä, ja yhdistelmiä. Vastauksia ei tallenneta jos ei ole sisäänkirjautunut. Sisäänkirjautuneen käyttäjän vastaukset (oikein vai väärin) tallennetaan yksittäisiä merkkejä kerratessa, ja oikein vastattuja merkkejä voi kerrata satunnaisessa järjestyksessä (vain jos on vastannut oikein tarpeeksi moneen). Jos käyttäjä on ylläpitäjä, voi hän lisätä ryhmiä, merkkejä ja niiden lukutapoja ja myöskin yhdistelmiä. Hän voi myös poistaa yksittäisiä merkkejä, jolloin kaikki niiden lukutavat yms. poistetaan myös, ja yhdistelmiä.
 
-## sovelluksen testaaminen Herokussa
-https://kanjiharjoittelusovellus.herokuapp.com/
+## sovelluksen testaaminen Renderissä
+https://kanjiharjoittelusovellus.onrender.com/
+
+**HUOM**: Koska Renderin ilmainen postgres tietokanta on voimassa vain rajoitetun ajan, ellei sitä päivitetä, toimii tämä sovellus tällä hetkellä **2.11.2023** asti, mikäli en sitä muista ennen tuota päivämäärää päivittää.
+
+Sovellusta pystyi ennen testaamaan herokussa, mutta heroku muuttui maksulliseksi, joten nyt on käytössä Render.
 
 lukutapa linkistä pääsee kertaamaan yksittäisiä kanji-merkkejä. Harjoitus 1:ssä on 3 merkkiä ja 2:ssa 2.
 
